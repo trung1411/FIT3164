@@ -13,17 +13,27 @@ import time
 # #Changing the names of the columns
 # df.columns = df.iloc[0,]
 
-
+st.title("FIT3164: Pricing Optimisation and Analysis")
 @st.cache_data
 def get_data(experimental_allow_widgets = True):
     df = pd.read_csv('modified_price.csv')
     df.head()
     df.transposr()
     df.columns = df.iloc[0,]
-    
-    st.header("Data analysis")
-    st.write("And here is the raw data")
-    st.dataframe(df)
+    return df
+
+
+#Creating a text element to show we are reading the data
+data_load_state = st.text('Loading data')
+#Read the data
+dataset = get_data()
+#Notify that the data was sucessfully loaded
+data_load_state.text("Done! (using st.cache_data)")
+
+
+st.subheader("Data analysis")
+st.write("And here is the raw data")
+st.dataframe(df)
 
 
 @st.experimental_fragment
