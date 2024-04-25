@@ -33,7 +33,7 @@ data_load_state.text("Done! (using st.cache_data)")
 
 st.subheader("Data analysis")
 st.write("And here is the raw data")
-st.dataframe(df)
+st.dataframe(dataset)
 
 
 @st.experimental_fragment
