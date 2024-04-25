@@ -3,7 +3,6 @@ import streamlit as st
 import altair as alt
 import matplotlib.pyplot as plt
 from datetime import date, timedelta
-import streamlit as slt
 import pandas as pd
 import time
 
@@ -23,7 +22,6 @@ def get_data(experimental_allow_widgets = True):
     df.columns = df.iloc[0,]
     
     st.header("Data analysis")
-    st.line_chart(df)
     st.write("And here is the raw data")
     st.dataframe(df)
 
