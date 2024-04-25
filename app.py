@@ -7,19 +7,25 @@ import streamlit as slt
 import pandas as pd
 import time
 
-#Reading the modified_price csv files
-df = pd.read_csv('modified_price.csv')
-#Transposing the csv files so that we can perform the data analysis
-df = df.transpose()
-#Changing the names of the columns
-df.columns = df.iloc[0,]
+# #Reading the modified_price csv files
+# df = pd.read_csv('modified_price.csv')
+# #Transposing the csv files so that we can perform the data analysis
+# df = df.transpose()
+# #Changing the names of the columns
+# df.columns = df.iloc[0,]
 
 
 @st.cache_data
-def get_data():
-    calendar = pd.read_csv('calendar.csv')
-    calendar.head()
-    st.line_chart(calendar)
+def get_data(experimental_allow_widgets = True):
+    df = pd.read_csv('modified_price.csv')
+    df.head()
+    df.transposr()
+    df.columns = df.iloc[0,]
+    
+    st.header("Data analysis")
+    st.line_chart(df)
+    st.write("And here is the raw data")
+    st.dataframe(df)
 
 
 @st.experimental_fragment
