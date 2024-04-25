@@ -14,11 +14,13 @@ import time
 # df.columns = df.iloc[0,]
 
 st.title("FIT3164: Pricing Optimisation and Analysis")
+st.header("Project Overview")
+st.write("In the highly competitive world of retail, determining the proper price for products is a vital factor for manufacturers to ensure they are maximising their sales whilst also guaranteeing their profits. Pricing strategy is the core of a company's marketing strategy. The right pricing strategy not only has an impact on sales volume, but also plays a pivotal role in allowing companies to maximise profits, grow market share and further enhance their brand loyalty. There are multiple factors that can affect the pricing strategy of a product or service, including supply and demand of the products, pricing of competitors or whether the product itself is a necessity or not. ")
 @st.cache_data
 def get_data(experimental_allow_widgets = True):
     df = pd.read_csv('modified_price.csv')
     df.head()
-    df.transposr()
+    df.transpose()
     df.columns = df.iloc[0,]
     return df
 
