@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 from datetime import date, timedelta
 import pandas as pd
 import time
-from vega_datasets import data
+import altair as alt
+
 
 # #Reading the modified_price csv files
 # df = pd.read_csv('modified_price.csv')
@@ -73,9 +74,28 @@ new_df = new_df.transpose().replace(np.nan,0)
 new_df.columns = new_df.iloc[0,]
 # new_df = df.drop(['dept_id'], axis = 'index')
 new_df = new_df.drop(['item_id', 'dept_id'], axis = "index")
+#Changing the first column name to weeks
+
 st.dataframe(new_df)
 
-st.altair_chart(new_df)
+# st.vega_lite_chart(new_df,{
+#     "mark": {"type:" "line"},
+#             "enconding":{
+
+#             "y": {"field": product_choice, "type": "quantitative"}
+#     } },)
+# st.line_chart(new_df)
+
+chart = (alt.Chart(
+    data = new_df,
+    title = "Percent change in price of different products over the weeks",
+    ).mark_line(
+
+    ))
+
+st.altair_chart(chart)
+
+# st.altair_chart(c, use_container_width= True)
 
 
 #graphs = st.line_chart(dataset[,products])
