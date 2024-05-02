@@ -27,10 +27,14 @@ st.markdown("In the highly competitive world of retail, determining the proper p
 def get_data(experimental_allow_widgets = True):
     df = pd.read_csv('modified_price.csv')
     df.head()
-    df.transpose()
+    # df = df.transpose()
     # df.columns = df.iloc[0,]
+    # df = df.drop(['dept_id'], axis = 'index')
+    # df = df.drop(['item_id', 'dept_id'], axis = "index")
     return df
 
+st.header("Team Member Introduction")
+st.markdown("Working together as a group of four (Thanh Trung Tran, Zejinyi Liu, Shuen Y'ng Tan, Yun Gu), our group project aimed to explore the relative responsiveness of change in quantity demanded to different changes in unit price of multiple products,using  the datasets containing unit sales of different products of Walmart from Jan 2011 to April 2016. The objective is to recalibrate pricing strategies in resonance with market dynamics, thereby stimulating customer inclination to pay and enhancing overall company profitability. Thanh Trung Tran, the web developer and team leader, oversaw the project's direction and ensured seamless collaboration among team members. Zejinyi Liu, the data scientist and side project manager, focused on data analysis and modelling while also supporting project management tasks. Shuen Y'ng Tan, the project manager and side web developer, spearheaded the overall project management efforts and contributed to the web development aspects. Yun Gu, the admin and side data analyst, handled administrative tasks and supported data analysis activities alongside Zejinyi Liu.")
 
 #Creating a text element to show we are reading the data
 data_load_state = st.text('Loading data')
@@ -43,6 +47,39 @@ data_load_state.text("Done! (using st.cache_data)")
 st.subheader("Data analysis")
 st.write("And here is the raw data")
 st.dataframe(dataset)
+# st.line_chart(dataset)
+
+# Create a selection of products without the duplicates
+item = dataset['item_id'].drop_duplicates()
+departments = dataset['dept_id'].drop_duplicates()
+
+# Create the sidebar to select products from 
+
+product_choice = st.sidebar.selectbox('Choose the item_Id', item)
+departments_choice = st.sidebar.selectbox('Choose the department_id', departments)
+
+
+#Filtering the dataset based on the input from the users.
+st.header("Individual item analysis")
+st.markdown("Something something. On the left are select box where users can choose their specific item_id in which they want to choose from. They can also choose their expected iem price change and then below will show a line graph")
+
+
+# Select the rows containing the item_id of the selected item in the select box and manipulate the new rows to create a new data fram suitable to create a line graph to visualise
+new_df = dataset.loc[dataset['item_id'] == product_choice]
+new_df = new_df.transpose()
+new_df.columns = new_df.iloc[0,]
+# new_df = df.drop(['dept_id'], axis = 'index')
+new_df = new_df.drop(['item_id', 'dept_id'], axis = "index")
+st.dataframe(new_df)
+
+st.line_chart(new_df)
+
+
+#graphs = st.line_chart(dataset[,products])
+
+
+
+
 
 
 
