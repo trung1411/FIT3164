@@ -1,10 +1,12 @@
 #Importing streamlit
 import streamlit as st
 import altair as alt
+import numpy as np
 import matplotlib.pyplot as plt
 from datetime import date, timedelta
 import pandas as pd
 import time
+from vega_datasets import data
 
 # #Reading the modified_price csv files
 # df = pd.read_csv('modified_price.csv')
@@ -24,7 +26,7 @@ st.title("FIT3164: Pricing Optimisation and Analysis")
 st.header("Project Overview")
 st.markdown("In the highly competitive world of retail, determining the proper price for products is a vital factor for manufacturers to ensure they are maximising their sales whilst also guaranteeing their profits. Pricing strategy is the core of a company's marketing strategy. The right pricing strategy not only has an impact on sales volume, but also plays a pivotal role in allowing companies to maximise profits, grow market share and further enhance their brand loyalty. There are multiple factors that can affect the pricing strategy of a product or service, including supply and demand of the products, pricing of competitors or whether the product itself is a necessity or not. ")
 @st.cache_data
-def get_data(experimental_allow_widgets = True):
+def get_modified_sales_data(experimental_allow_widgets = True):
     df = pd.read_csv('modified_price.csv')
     df.head()
     # df = df.transpose()
@@ -33,13 +35,14 @@ def get_data(experimental_allow_widgets = True):
     # df = df.drop(['item_id', 'dept_id'], axis = "index")
     return df
 
+
 st.header("Team Member Introduction")
 st.markdown("Working together as a group of four (Thanh Trung Tran, Zejinyi Liu, Shuen Y'ng Tan, Yun Gu), our group project aimed to explore the relative responsiveness of change in quantity demanded to different changes in unit price of multiple products,using  the datasets containing unit sales of different products of Walmart from Jan 2011 to April 2016. The objective is to recalibrate pricing strategies in resonance with market dynamics, thereby stimulating customer inclination to pay and enhancing overall company profitability. Thanh Trung Tran, the web developer and team leader, oversaw the project's direction and ensured seamless collaboration among team members. Zejinyi Liu, the data scientist and side project manager, focused on data analysis and modelling while also supporting project management tasks. Shuen Y'ng Tan, the project manager and side web developer, spearheaded the overall project management efforts and contributed to the web development aspects. Yun Gu, the admin and side data analyst, handled administrative tasks and supported data analysis activities alongside Zejinyi Liu.")
 
 #Creating a text element to show we are reading the data
 data_load_state = st.text('Loading data')
 #Read the data
-dataset = get_data()
+dataset = get_modified_sales_data()
 #Notify that the data was sucessfully loaded
 data_load_state.text("Done! (using st.cache_data)")
 
@@ -66,13 +69,13 @@ st.markdown("Something something. On the left are select box where users can cho
 
 # Select the rows containing the item_id of the selected item in the select box and manipulate the new rows to create a new data fram suitable to create a line graph to visualise
 new_df = dataset.loc[dataset['item_id'] == product_choice]
-new_df = new_df.transpose()
+new_df = new_df.transpose().replace(np.nan,0)
 new_df.columns = new_df.iloc[0,]
 # new_df = df.drop(['dept_id'], axis = 'index')
 new_df = new_df.drop(['item_id', 'dept_id'], axis = "index")
 st.dataframe(new_df)
 
-st.line_chart(new_df)
+st.altair_chart(new_df)
 
 
 #graphs = st.line_chart(dataset[,products])
