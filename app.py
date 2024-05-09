@@ -43,6 +43,15 @@ def get_modified_sales_data(allow_output_mutation = True):
     df2 = pd.read_csv('modified_sales.csv')
     return df2
 
+@st.cache_data
+def get_percent_change_price(allow_output_mutation = True):
+    df3 = pd.read_csv('percent_change_price.csv')
+    return df3
+
+@st.cache_data
+def get_percent_change_sales(allow_output_mutation = True):
+    df4 = pd.read_csv('percent_change_sale.csv')
+    return df4
 
 st.header("Team Member Introduction")
 st.markdown("Working together as a group of four (Thanh Trung Tran, Zejinyi Liu, Shuen Y'ng Tan, Yun Gu), our group project aimed to explore the relative responsiveness of change in quantity demanded to different changes in unit price of multiple products,using  the datasets containing unit sales of different products of Walmart from Jan 2011 to April 2016. The objective is to recalibrate pricing strategies in resonance with market dynamics, thereby stimulating customer inclination to pay and enhancing overall company profitability. Thanh Trung Tran, the web developer and team leader, oversaw the project's direction and ensured seamless collaboration among team members. Zejinyi Liu, the data scientist and side project manager, focused on data analysis and modelling while also supporting project management tasks. Shuen Y'ng Tan, the project manager and side web developer, spearheaded the overall project management efforts and contributed to the web development aspects. Yun Gu, the admin and side data analyst, handled administrative tasks and supported data analysis activities alongside Zejinyi Liu.")
@@ -64,8 +73,8 @@ departments = dataset['dept_id'].drop_duplicates()
 
 # Create the sidebar to select products from 
 
-product_choice = st.sidebar.selectbox('Choose the item_id for price change', item)
-departments_choice = st.sidebar.selectbox('Choose the department_id for price change', departments)
+product_choice = st.sidebar.selectbox('Choose the item_id', item)
+departments_choice = st.sidebar.selectbox('Choose the department_id', departments)
 
 
 ##################################################################
@@ -73,13 +82,21 @@ departments_choice = st.sidebar.selectbox('Choose the department_id for price ch
 st.header("Individual item price analysis")
 st.markdown("Something something. On the left are select box where users can choose their specific item_id in which they want to choose from. They can also choose their expected iem price change and then below will show a line graph")
 # Select the rows containing the item_id of the selected item in the select box and manipulate the new rows to create a new data fram suitable to create a line graph to visualise
-dataset = dataset.transpose().replace(np.nan,0)
-dataset.columns = dataset.iloc[0,]
-dataset = dataset.drop(['item_id', 'dept_id'], axis = "index")
-#Select the row with the user selected product_id
-new_df = dataset[product_choice]
-#Display the dataframe in a line chart
+new_df = dataset.loc[dataset['item_id'] == product_choice]
+new_df = new_df.transpose().replace(np.nan, 0)
+new_df = new_df.drop(['item_id', 'dept_id'], axis = "index")
+new_df.columns = ['Percent price change']
+# new_df['Week'] = [str(x) for x in range(11101, 11354)]
+
 st.line_chart(new_df)
+#Display the dataframe in a line chart
+
+
+# c = alt.Chart(new_df).mark_line().encode( x= "Week", y = 'Percent price change'
+#                                           ).properties(title = 'Percent change in price over time for product {item_id}'.format(item_id = product_choice))
+
+
+# st.altair_chart(c)
 
 st.markdown("Each of the line chart here display the change in price of each product in percentage in comparison to their previous week, with the first week being labeled 11101 which starts counting from Saturday 29/01/2011")
 
@@ -96,28 +113,62 @@ st.markdown("In a similar manner, we manipulate the given datasets and aggregrat
 
 dataset2 = get_modified_sales_data()
 # Create a selection of products without the duplicates
-item2 = dataset2['item_id'].drop_duplicates()
-departments2 = dataset2['dept_id'].drop_duplicates()
-#Create new sidebar
-product_choice2 = st.sidebar.selectbox('Choose the item_id for sales change', item2)
-departments_choice2 = st.sidebar.selectbox('Choose the department_id for sales change', departments2)
+# item2 = dataset2['item_id'].drop_duplicates()
+# departments2 = dataset2['dept_id'].drop_duplicates()
+# #Create new sidebar
+# product_choice2 = st.sidebar.selectbox('Choose the item_id for sales change', item2)
+# departments_choice2 = st.sidebar.selectbox('Choose the department_id for sales change', departments2)
 
 
-new_df2 = dataset2.loc[dataset2['item_id'] == product_choice2]
+new_df2 = dataset2.loc[dataset2['item_id'] == product_choice]
 new_df3 = new_df2.transpose().replace(np.nan,0)
 # new_df3 = new_df3[0]
 #Dropping the item_id and dept_id row
 new_df3 = new_df3.drop(['item_id', 'dept_id'], axis = "index")
 new_df3 = new_df3.iloc[:, :1]
+new_df3.columns = ['Percent sales change']
+new_df3['Week'] = [str(x) for x in range(11101, 11354)]
+
+
+# st.line_chart(new_df3)
+c1 = alt.Chart(new_df3).mark_line().encode( x= "Week", y = 'Percent sales change'
+                                          ).properties(title = 'Percent change in sales  over time for product {item_id}'.format(item_id = product_choice))
+
+
+st.altair_chart(c1)
 
 #Generating a linechart
-st.line_chart(new_df3)
+# st.line_chart(new_df3)
 
 st.markdown("Each of the line chart here display the change in sales of each product in percentage in comparison to their previous week, with the first week being labeled 11101 which starts counting from Saturday 29/01/2011")
 
 
-st.header()
+st.header("Price Elasticity Modelling")
+st.markdown("We originally explore our given Datsets to determine the percent change in price and sales of each products based on their product id, each is stored separately in a dataset. Afterwards, we calulate the price elasticity model of each product by divide the percent change in sales over the percent change in price and aim to observe if each products is either elastic or inelastic. However, upon examining each of the graphs produced, we can conclude that ")
 
+
+#Reading the datasets
+percent_sales = get_percent_change_sales()
+percent_price = get_percent_change_price()
+
+## 
+percent_sales_ind = percent_sales.loc[percent_sales['item_id'] == product_choice]
+percent_sales_ind2 = percent_sales_ind.transpose().replace(np.nan, 0)
+percent_sales_ind2 = percent_sales_ind2.drop(['item_id','dept_id'], axis = "index")
+#Getting the 1st column of the dataset only
+percent_sales_ind2 = percent_sales_ind2.iloc[:, :1]
+percent_sales_ind2.columns = [product_choice]
+
+percent_price_ind = percent_price.loc[percent_price['item_id'] == product_choice]
+percent_price_ind2 = percent_price_ind.transpose().replace(np.nan, 0)
+percent_price_ind2 = percent_price_ind2.drop(['item_id','dept_id'], axis = "index")
+percent_price_ind2 = percent_price_ind2[:-1]
+percent_price_ind2.columns = [product_choice]
+
+st.dataframe(percent_price_ind2)
+st.dataframe(percent_sales_ind2)
+
+# price_elasticity_model_ind = percent_price_ind2[]
 
 # dataset.columns = dataset2.iloc[0,]
 # dataset2 = dataset2.drop(['item_id', 'dept_id'], axis = "index")
