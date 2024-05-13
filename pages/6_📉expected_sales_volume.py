@@ -5,6 +5,7 @@ import streamlit as st
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import os
+import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.models import load_model
 from keras.models import Model
@@ -61,8 +62,8 @@ department_choice = st.sidebar.selectbox('Choose the department_id', departments
 #Reading h5 file
 # food1 = h5py.File("FOODS_1_rnn_model.h5", 'r')
 
-st.header("Expected sales volume")
-st.markdown(" We decide to implement base RNN as our main method of machine learning. Upon inputting the expected price discount cohange on the left select box, our model will output the expected percent change in sales volume ")
+# st.header("Expected sales volume")
+# st.markdown(" We decide to implement base RNN as our main method of machine learning. Upon inputting the expected price discount cohange on the left select box, our model will output the expected percent change in sales volume ")
 
 
 #user input current change of price
@@ -71,7 +72,8 @@ st.markdown(" We decide to implement base RNN as our main method of machine lear
 model_to_use = '{dept_id}_rnn_model.h5'.format(dept_id = department_choice)
 st.write(model_to_use)
 #Input the model
-rnn_model = load_model(model_to_use)
+# rnn_model = load_model(model_to_use)
+
 
 new_df = dataset2.loc[(dataset2['item_id'] == product_choice)]
 st.dataframe(new_df)
