@@ -21,7 +21,7 @@ import h5py
 
 @st.cache_data
 def get_modified_sales_data(allow_output_mutation = True):
-    df2 = pd.read_csv('modified_sales.csv')
+    df2 = pd.read_csv('percent_change_sale.csv')
     return df2
 
 dataset2 = get_modified_sales_data()
@@ -45,7 +45,6 @@ departments = dataset2['dept_id'].drop_duplicates()
 
 # Create a sidebar to select departments from
 department_choice = st.sidebar.selectbox('Choose the department_id', departments)
-
 
 # price_elasticity_model_ind = percent_price_ind2[]
 
