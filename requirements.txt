@@ -5,4 +5,9 @@ matplotlib
 numpy
 vega_datasets==0.9.0
 protobuf==3.20.*
+scipy
+# Tensorflow.
+tensorflow-cpu~=2.16.1;sys_platform != 'darwin'  # Pin to TF 2.16
+tensorflow~=2.16.1;sys_platform == 'darwin'
+keras
 
