@@ -8,6 +8,12 @@ import pandas as pd
 import time
 import altair as alt
 from vega_datasets import data
+import h5py 
+
+# import tensorflow as tf
+# from tensorflow.python.keras.models import Model
+# from tensorflow.python.keras.layers import Input, GRU, LSTM, SimpleRNN, Dense, Concatenate
+# from keras import backend as K
 
 
 
@@ -188,7 +194,7 @@ c2 = alt.Chart(price_elasticity_model).mark_line().encode( x= "Week", y = 'Elast
 
 st.altair_chart(c2)
 
-st.header("Additional Feature Engineering")
+st.header("Expected sales volume")
 st.markdown("By implementing machine learning using the base RNN model, we are lookikng to predict the potential sales made when user get to choose their expected change in price (discount) and the model would product the expected sales")
 
 number = st.number_input("Please enter the percent discount you want to apply to the product")
@@ -207,7 +213,8 @@ st.write("The current discount applied is {a}%".format(a = number))
 # #Display the dataframe in a line chart
 # st.line_chart(new_df2)
 
-
+#Reading h5 file
+food1 = h5py.File("FOODS_1_rnn_model.h5")
 
 
 
