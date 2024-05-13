@@ -59,7 +59,7 @@ department_choice = st.sidebar.selectbox('Choose the department_id', departments
 # #Display the dataframe in a line chart
 # st.line_chart(new_df2)
 #Reading h5 file
-food1 = h5py.File("FOODS_1_rnn_model.h5", 'r')
+# food1 = h5py.File("FOODS_1_rnn_model.h5", 'r')
 
 st.header("Expected sales volume")
 st.markdown(" We decide to implement base RNN as our main method of machine learning. Upon inputting the expected price discount cohange on the left select box, our model will output the expected percent change in sales volume ")

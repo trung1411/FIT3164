@@ -8,7 +8,6 @@ import pandas as pd
 import time
 import altair as alt
 from vega_datasets import data
-import h5py 
 import streamlit_authenticator as stauth
 import yaml
 from yaml.loader import SafeLoader
