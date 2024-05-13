@@ -32,7 +32,7 @@ def get_modified_price_data(allow_output_mutation = True):
 
 
 st.header("Price Elasticity Modelling for individual products")
-st.markdown("We originally explore our given Datsets to determine the percent change in price and sales of each products based on their product id, each is stored separately in a dataset. Afterwards, we calulate the price elasticity model of each product by divide the percent change in sales over the percent change in price and aim to observe if each products is either elastic or inelastic. However, upon examining each of the graphs produced, we can conclude that ")
+st.markdown("We originally explore our given Datsets to determine the percent change in price and sales of each products based on their product id, each is stored separately in a dataset. Afterwards, we calulate the price elasticity model of each product by divide the percent change in sales over the percent change in price and aim to observe if each products is either elastic or inelastic. Users can freely choose the item_id that they would like to observe their respective price elasticity modelling over time for")
 
 dataset = get_modified_price_data()
 #Reading the datasets
