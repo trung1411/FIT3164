@@ -4,10 +4,13 @@ import numpy as np
 import streamlit as st
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-import tensorflow as tf
+import os
 from tensorflow import keras
-from keras import layers
-import tensorflow.keras.Model
+from tensorflow.keras.models import load_model
+from keras.models import Model
+from keras.layers import Input, GRU, LSTM, SimpleRNN, Dense, Concatenate
+from keras import backend as K
+
 # from keras.model import Model
 # from keras.layers import Input, GRU, LSTM, SimpleRNN, Dense, Concatenate
 from keras import backend as K
@@ -55,12 +58,6 @@ department_choice = st.sidebar.selectbox('Choose the department_id', departments
 # st.dataframe(new_df2)
 # #Display the dataframe in a line chart
 # st.line_chart(new_df2)
-
-
-
-
-
-
 #Reading h5 file
 food1 = h5py.File("FOODS_1_rnn_model.h5", 'r')
 
@@ -68,16 +65,13 @@ st.header("Expected sales volume")
 st.markdown(" We decide to implement base RNN as our main method of machine learning. Upon inputting the expected price discount cohange on the left select box, our model will output the expected percent change in sales volume ")
 
 
-a = food1.keys()
-st.write(a)
-
 #user input current change of price
 #user input current price
 
 model_to_use = '{dept_id}_rnn_model.h5'.format(dept_id = department_choice)
 st.write(model_to_use)
 #Input the model
-rnn_model = tf.keras.model.load_model('FOODS_1_rnn_model.h5')
+rnn_model = load_model(model_to_use)
 
 new_df = dataset2.loc[(dataset2['item_id'] == product_choice)]
 st.dataframe(new_df)
