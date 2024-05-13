@@ -67,6 +67,7 @@ st.markdown("Working together as a group of four (Thanh Trung Tran, Zejinyi Liu,
 data_load_state = st.text('Loading data')
 #Read the data
 dataset = get_modified_price_data()
+dataset2 = get_modified_sales_data()
 #Notify that the data was sucessfully loaded
 
 st.subheader("Data analysis")
@@ -74,11 +75,23 @@ st.subheader("Data analysis")
 
 # Create a selection of products without the duplicates
 item = dataset['item_id'].drop_duplicates()
+item = item[0: len(item.index) -7, ]
+# Create a selection of departments without the duplicates
 departments = dataset['dept_id'].drop_duplicates()
+
+#Getting the different store_id available
+store = dataset2['store_id'].drop_duplicates()
+store = store[0:10, ]
+
+
+
 
 # Create the sidebar to select products from 
 
 product_choice = st.sidebar.selectbox('Choose the item_id or department_id', item)
+store_choice = st.sidebar.selectbox('Choose the store_id', store)
+department_choice = st.sidebar.selectbox('Choose the department_id', departments)
+
 # departments_choice = st.sidebar.selectbox('Choose the department_id', departments)
 
 
@@ -92,25 +105,14 @@ new_df = new_df.transpose().replace(np.nan, 0)
 new_df = new_df.drop(['item_id', 'dept_id'], axis = "index")
 new_df.columns = ['Percent price change']
 # new_df['Week'] = [str(x) for x in range(11101, 11354)]
-
-st.line_chart(new_df)
 #Display the dataframe in a line chart
+st.line_chart(new_df)
 
 
-# c = alt.Chart(new_df).mark_line().encode( x= "Week", y = 'Percent price change'
-#                                           ).properties(title = 'Percent change in price over time for product {item_id}'.format(item_id = product_choice))
-
-
-# st.altair_chart(c)
-# st.markdown("Each of the line chart here display the change in price of each product in percentage in comparison to their previous week, with the first week being labeled 11101 which starts counting from Saturday 29/01/2011")
-
-# new_df = dataset.loc[dataset['item_id'] == product_choice]
-# new_df2 = new_df.transpose().replace(np.nan,0)
-# a = len(new_df2.columns)
 ########################################################################
 st.header("Individual item sales analysis")
 st.markdown("In a similar manner, we manipulate the given datasets and aggregrate their sales based on each individual item_id and based on their respective department, and hence produce the graph showcase the change in sales of each product over their respective weeks")
-dataset2 = get_modified_sales_data()
+
 
 st.dataframe(dataset2)
 # Create a selection of products without the duplicates
@@ -119,19 +121,25 @@ st.dataframe(dataset2)
 # #Create new sidebar
 # product_choice2 = st.sidebar.selectbox('Choose the item_id for sales change', item2)
 # departments_choice2 = st.sidebar.selectbox('Choose the department_id for sales change', departments2)
-new_df2 = dataset2.loc[dataset2['item_id'] == product_choice]
+new_df2 = dataset2.loc[(dataset2['item_id'] == product_choice) & (dataset2['store_id'] == store_choice)]
 new_df3 = new_df2.transpose().replace(np.nan,0)
-# new_df3 = new_df3[0]
+
+
+
 #Dropping the item_id and dept_id row
-new_df3 = new_df3.drop(['item_id', 'dept_id'], axis = "index")
-new_df3 = new_df3.iloc[:, :1]
+new_df3 = new_df3.drop(['item_id', 'dept_id', 'store_id'], axis = "index")
+# Select the dataset of the given store
+# new_df3 = new_df.loc['store_id']
+# new_df3 = new_df3[0]
+
+# new_df3 = new_df3.iloc[:, :1]
 new_df3.columns = ['Sales']
 new_df3['Week'] = [str(x) for x in range(11101, 11354)]
 
 
 # st.line_chart(new_df3)
 c1 = alt.Chart(new_df3).mark_line().encode( x= "Week", y = 'Sales'
-                                          ).properties(title = 'Change in sales  over time for product {item_id}'.format(item_id = product_choice))
+                                          ).properties(title = 'Change in sales  over time for product {item_id} in store {store_id}'.format(item_id = product_choice, store_id = store_choice))
 
 
 st.altair_chart(c1)
@@ -140,6 +148,31 @@ st.altair_chart(c1)
 # st.line_chart(new_df3)
 # st.markdown("Each of the line chart here display the change in sales of each product in percentage in comparison to their previous week, with the first week being labeled 11101 which starts counting from Saturday 29/01/2011")
 ######################################################
+
+#####################################3
+# Department sales analysis
+st.header("Department sales analysis")
+st.markdown("Here we perform our data analysis on the sales aggregrated for each department, by choosing from the options of 10 stores across 3 particular states: Wiscosin (WI), Texas (TX), and  California (CA), you will be able to observe a line chart denoting their sales change aggregrated starting from week 11101 which starts on Saturady 29/01/2011")
+new_df4 = dataset2.loc[dataset2['item_id'] == department_choice]
+new_df4 = new_df4.transpose().replace(np.nan,0)
+
+#Dropping the item_id, dept_id and store_id row
+new_df4 = new_df4.drop(['item_id', 'dept_id', 'store_id'], axis = "index")
+new_df4.columns = ['Sales']
+new_df4['Week'] = [str(x) for x in range(11101, 11354)]
+
+
+#Constructing the line chart
+c2 = alt.Chart(new_df4).mark_line().encode( x= "Week", y = 'Sales'
+                                          ).properties(title = 'Change in sales  over time for department {dept_id}'.format(dept_id = department_choice))
+
+
+st.altair_chart(c2)
+
+
+
+
+
 st.header("Price Elasticity Modelling")
 st.markdown("We originally explore our given Datsets to determine the percent change in price and sales of each products based on their product id, each is stored separately in a dataset. Afterwards, we calulate the price elasticity model of each product by divide the percent change in sales over the percent change in price and aim to observe if each products is either elastic or inelastic. However, upon examining each of the graphs produced, we can conclude that ")
 
@@ -191,10 +224,10 @@ price_elasticity_model.set_index('Week')
 price_elasticity_model.columns = ['Elasticity', 'Week']
 
 #Making the time series graph using alt.chart
-c2 = alt.Chart(price_elasticity_model).mark_line().encode( x= "Week", y = 'Elasticity'
+c3 = alt.Chart(price_elasticity_model).mark_line().encode( x= "Week", y = 'Elasticity'
                                           ).properties(title = 'Change in elasticity  over time for product {item_id}'.format(item_id = product_choice))
 
-st.altair_chart(c2)
+st.altair_chart(c3)
 
 st.header("Expected sales volume")
 st.markdown("By implementing machine learning using the base RNN model, we are lookikng to predict the potential sales made when user get to choose their expected change in price (discount) and the model would product the expected sales")
