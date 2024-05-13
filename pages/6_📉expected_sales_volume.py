@@ -75,7 +75,9 @@ st.write(model_to_use)
 
 
 new_df = dataset2.loc[(dataset2['item_id'] == product_choice)]
-st.dataframe(new_df)
+new_df2 = new_df.transpose().replace(np.nan,0)
+
+st.dataframe(new_df2)
 
 #Show the model architecture
 # rnn_model.summary()
