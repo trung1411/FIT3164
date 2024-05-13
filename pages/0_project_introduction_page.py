@@ -3,6 +3,8 @@ import streamlit as st
 import altair as alt
 import numpy as np
 import matplotlib.pyplot as plt
+from time import sleep
+from st_pages import hide_pages
 
 st.title("FIT3164: Pricing Optimisation and Analysis")
 st.header("Project Overview")
@@ -14,3 +16,16 @@ st.markdown("Working together as a group of four (Thanh Trung Tran, Zejinyi Liu,
 
 st.header("Dataset Introduction")
 st.markdown("Something Something")
+
+
+st.button("Log out")
+
+
+
+hide_pages(["login"])
+#Adding a log out button
+if st.button("Log out"):
+    st.session_state["logged_in"] = False
+    st.success("Logged out!")
+    sleep(0.5)
+    st.switch_page("app.py")
