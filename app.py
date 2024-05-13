@@ -28,7 +28,7 @@ authenticator = stauth.Authenticate(
 name, authentication_status, username = authenticator.login('main', fields = {'Form name': 'Login Page'})
 
 if authentication_status:
-    authenticator.logout('Logout', 'main')
+    authenticator.logout()
     if username == 'jsmith':
         st.write(f'Welcome *{name}*')
         st.switch_page("pages/0_project_introduction_page.py")
