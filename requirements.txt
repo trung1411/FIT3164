@@ -12,3 +12,4 @@ tensorflow~=2.16.1;sys_platform == 'darwin'
 keras
 h5py
 streamlit_authenticator
+st_pages
