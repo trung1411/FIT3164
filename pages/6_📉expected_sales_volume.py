@@ -76,7 +76,7 @@ st.write(model_to_use)
 
 new_df = dataset2.loc[(dataset2['item_id'] == product_choice)]
 new_df2 = new_df.transpose().replace(np.nan,0)
-
+new_df2 = new_df2.iloc[:,:1]
 st.dataframe(new_df2)
 
 #Show the model architecture
