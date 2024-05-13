@@ -10,4 +10,5 @@ scipy
 tensorflow-cpu~=2.16.1;sys_platform != 'darwin'  # Pin to TF 2.16
 tensorflow~=2.16.1;sys_platform == 'darwin'
 keras
-
+h5py
+streamlit_authenticator
