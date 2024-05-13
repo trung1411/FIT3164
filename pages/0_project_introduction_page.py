@@ -18,9 +18,6 @@ st.header("Dataset Introduction")
 st.markdown("Something Something")
 
 
-st.button("Log out")
-
-
 
 hide_pages(["login"])
 #Adding a log out button
