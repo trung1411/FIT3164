@@ -30,4 +30,17 @@ st.write("The current discount applied is {a}%".format(a = number))
 # st.line_chart(new_df2)
 
 #Reading h5 file
-food1 = h5py.File("FOODS_1_rnn_model.h5")
+food1 = h5py.File("FOODS_1_rnn_model.h5", 'r')
+
+a = food1.keys()
+st.write(a)
+
+#Making 2 groups
+group1 = food1['model_weights']
+group2 = food1['optimizer_weights']
+
+st.write(group1.keys())
+st.write(group2.keys())
+group3 = group1['concatenate']
+group4 = group1['']
+st.write(group4.keys())
