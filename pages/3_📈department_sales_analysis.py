@@ -23,7 +23,7 @@ department_choice = st.sidebar.selectbox('Choose the department_id', departments
 
 # Department sales analysis
 st.header("Department sales analysis")
-st.markdown("Here we perform our data analysis on the sales aggregrated for each department, by choosing from the options of 10 stores across 3 particular states: Wiscosin (WI), Texas (TX), and  California (CA), you will be able to observe a line chart denoting their sales change aggregrated starting from week 11101 which starts on Saturady 29/01/2011")
+st.markdown("Here we perform our data analysis on the sales aggregrated for each department, by choosing from the options of 10 stores across 3 particular states: Wiscosin (WI), Texas (TX), and  California (CA), you will be able to observe a line chart denoting their sales change aggregrated starting from week 11101 which starts on Saturady 29/01/2011.")
 new_df4 = dataset2.loc[dataset2['item_id'] == department_choice]
 new_df4 = new_df4.transpose().replace(np.nan,0)
 
