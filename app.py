@@ -88,7 +88,7 @@ store = store[0:10, ]
 
 # Create the sidebar to select products from 
 
-product_choice = st.sidebar.selectbox('Choose the item_id or department_id', item)
+product_choice = st.sidebar.selectbox('Choose the item_id', item)
 store_choice = st.sidebar.selectbox('Choose the store_id', store)
 department_choice = st.sidebar.selectbox('Choose the department_id', departments)
 
