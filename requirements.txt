@@ -13,4 +13,4 @@ keras
 h5py
 streamlit_authenticator
 st_pages
-sklearn
+scikit-learn
