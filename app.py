@@ -111,6 +111,8 @@ st.line_chart(new_df)
 st.header("Individual item sales analysis")
 st.markdown("In a similar manner, we manipulate the given datasets and aggregrate their sales based on each individual item_id and based on their respective department, and hence produce the graph showcase the change in sales of each product over their respective weeks")
 dataset2 = get_modified_sales_data()
+
+st.dataframe(dataset2)
 # Create a selection of products without the duplicates
 # item2 = dataset2['item_id'].drop_duplicates()
 # departments2 = dataset2['dept_id'].drop_duplicates()
