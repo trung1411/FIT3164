@@ -11,7 +11,7 @@ from tensorflow.keras.models import load_model
 from keras.models import Model
 from keras.layers import Input, GRU, LSTM, SimpleRNN, Dense, Concatenate
 from keras import backend as K
-
+st.write(tf.version.VERSION)
 # from keras.model import Model
 # from keras.layers import Input, GRU, LSTM, SimpleRNN, Dense, Concatenate
 from keras import backend as K
