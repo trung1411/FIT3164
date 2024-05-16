@@ -4,7 +4,7 @@ numpy
 matplotlib
 numpy
 vega_datasets==0.9.0
-protobuf==3.20.*
+protobuf==3.20.1
 scipy
 
 keras
