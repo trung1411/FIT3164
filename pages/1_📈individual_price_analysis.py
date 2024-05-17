@@ -44,7 +44,7 @@ new_df.columns = ['Percent price change']
 # new_df['Week'] = [str(x) for x in range(11101, 11354)]
 #Display the dataframe in a line chart
 
-st.write("This is the line graph showing price analysis of {item_id}".format(item_id = product_choice))
+st.markdown("This is the line graph showing price analysis of {item_id}".format(item_id = product_choice))
 st.line_chart(new_df)
 
 # Next page button
