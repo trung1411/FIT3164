@@ -39,3 +39,10 @@ c2 = alt.Chart(new_df4).mark_line().encode( x= "Week", y = 'Sales'
 
 
 st.altair_chart(c2)
+
+#Next page
+if st.button("Next page"):
+    st.switch_page("4_💲price_elasticity_modelling.py")
+
+if st.button("Go back"):
+    st.switch_page("2_📈indidividual_sales_analysis.py")
