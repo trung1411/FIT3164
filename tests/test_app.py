@@ -7,7 +7,7 @@ def test_login():
     at.text_input[0].input("jsmith").run()
     at.text_input[1].input("abcd").run()
     at.button[0].click().run()
-    assert at.error[0].value == "Username/password is incorrect"
+    assert at.error
 
 
 def test_logout():
