@@ -95,5 +95,6 @@ for file in uploaded_files:
     bytes_data = file.read()
     st.write("File uploaded:", file.name)
 
-
-
+# Go back button
+if st.button("Go back"):
+    st.switch_page("pages/5_💲department_price_elasticity_modelling.py")
