@@ -27,6 +27,7 @@ st.markdown("Here we perform our data analysis on the sales aggregrated for each
 new_df4 = dataset2.loc[dataset2['item_id'] == department_choice]
 new_df4 = new_df4.transpose().replace(np.nan,0)
 
+
 #Dropping the item_id, dept_id and store_id row
 new_df4 = new_df4.drop(['item_id', 'dept_id', 'store_id'], axis = "index")
 new_df4.columns = ['Sales']
@@ -38,7 +39,7 @@ c2 = alt.Chart(new_df4).mark_line().encode( x= "Week", y = 'Sales'
                                           ).properties(title = 'Change in sales  over time for department {dept_id}'.format(dept_id = department_choice))
 
 
-st.altair_chart(c2)
+st.altair_chart(c2, use_container_width=True)
 
 #Next page
 if st.button("Next page"):

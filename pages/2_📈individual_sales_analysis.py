@@ -57,7 +57,7 @@ c1 = alt.Chart(new_df3).mark_line().encode( x= "Week", y = 'Sales'
                                           ).properties(title = 'Change in sales  over time for product {item_id} in store {store_id}'.format(item_id = product_choice, store_id = store_choice))
 
 
-st.altair_chart(c1)
+st.altair_chart(c1, use_container_width=True)
 
 # Next page button
 if st.button("Next page"):
