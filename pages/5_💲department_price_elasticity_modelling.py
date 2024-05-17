@@ -48,7 +48,7 @@ def get_percent_change_sales(allow_output_mutation = True):
 
 
 
-st.header("Price Elasticity Modelling aggregated by deparments")
+st.header("Price Elasticity Modelling aggregated by departments")
 st.markdown("After we conducted our price elasticity modelling for individual products, we notice that several products change of elasticity was rather not prominent and hard to detect, we decided to group all of their product sales and prices based on their department and then perform the price elasticity modelling on them instead. On the left, you can choose the departments that you wish to observe the price elasticity modelling for")
 
 dataset2 = get_modified_sales_data()
