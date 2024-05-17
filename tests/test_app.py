@@ -18,14 +18,15 @@ def test_logout():
 
 def test_traversing_through_pages():
     "Assuming users start at the project introduction page"
-    at = AppTest.from_file("../pages/0_project_introduction_page.py")
-    at.button[0].click().run()
+    at2 = AppTest.from_file("../pages/0_project_introduction_page.py").run()
+    at3 = at2.button[1].click().run()
     # Assert if there is a page switch
-    assert at.switch_page
+    assert at2.switch_page
+    assert at3.header[0].value == "Individual item price analysis"
+    # #Assume the users pick one value of item_id from the selectbox in the sidebar
+    # at2.sidebar.selectbox.select("HOUSEHOLD_2_516").run()
 
-    #Assume the users pick one value of item_id from the selectbox in the sidebar
-    at.sidebar.selectbox[0].select("HOUSEHOLD_2_516").run()
-    assert at.
+    # assert not at2.exception
 
 # def test_individual_price_analysis_page():
 #     "A user tries to select the item_id from the page"
