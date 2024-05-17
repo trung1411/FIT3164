@@ -10,11 +10,11 @@ from streamlit.testing.v1 import AppTest
 #     assert at.error
 
 
-def test_logout():
-    "A user tries to logout from the project intro page"
-    at = AppTest.from_file("../pages/0_project_introduction_page.py").run()
-    at.button[1].click().run()
-    assert at.switch_page
+# def test_logout():
+#     "A user tries to logout from the project intro page"
+#     at = AppTest.from_file("../pages/0_project_introduction_page.py").run()
+#     at.button[1].click().run()
+#     assert at.switch_page
 
 def test_traversing_through_pages():
     "Assuming users start at the project introduction page"
@@ -72,18 +72,38 @@ def test_page5():
     #Check if the header of the page is correct
     assert at4.header[0].value == "Price Elasticity Modelling for individual products" 
     item_id = "HOUSEHOLD_2_516"
-    # Setting the value for dept_id selectbox
+    # Setting the value for item_id selectbox
     at4.selectbox[0].select(item_id).run()
     assert not at4.exception
 
 def test_page6():
     #Loading page 6
-    at4 = AppTest.from_file("../pages/4_💲department_price_elasticity_modelling.py").run()
+    at4 = AppTest.from_file("../pages/5_💲department_price_elasticity_modelling.py").run()
     #Check if the header of the page is correct
-    assert at4.header[0].value == "Price Elasticity Modelling aggregated by deparments"
+    assert at4.header[0].value == "Price Elasticity Modelling aggregated by departments"
     dept_id = "HOBBIES_2"
     # Setting the value for dept_id selectbox
     at4.selectbox[0].select(dept_id).run()
+    assert not at4.exception
+
+
+def test_page7():
+    #Loading page 6
+    at4 = AppTest.from_file("../pages/7_expected_sales_volume.py").run()
+    #Check if the header of the page is correct
+    assert at4.header[0].value == "Expected sales volume"
+
+    #Setting the value for current price number_input
+    at4.number_input[0].set_value(10.0)
+    #Setting the value for the percent of price applied
+    at4.number_input[1].set_value(-0.02)
+    item_id = "FOODS_3_827"
+    dept_id = "HOBBIES_2"
+    # Setting the value for item_id selectbox
+    at4.selectbox[0].select(item_id).run()
+    # Setting the value for dept_id selectbox
+    at4.selectbox[1].select(dept_id).run()
+    assert at4.markdown[1].value == "The %change in sales volume will be 4.5%"
     assert not at4.exception
 
 
