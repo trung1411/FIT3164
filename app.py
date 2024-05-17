@@ -39,6 +39,8 @@ elif authentication_status == False:
 elif authentication_status == None:
     st.warning('Please enter your username and password')
 
+
+st.button("Register")
 # import tensorflow as tf
 # from tensorflow.python.keras.models import Model
 # from tensorflow.python.keras.layers import Input, GRU, LSTM, SimpleRNN, Dense, Concatenate
