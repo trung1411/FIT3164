@@ -44,3 +44,10 @@ new_df.columns = ['Percent price change']
 # new_df['Week'] = [str(x) for x in range(11101, 11354)]
 #Display the dataframe in a line chart
 st.line_chart(new_df)
+
+# Next page button
+if st.button("Next page"):
+    st.switch_page("2_📈individual_sales_analysis.py")
+
+if st.button("Go back"):
+    st.switch_page("0_project_introduction_page.py")
