@@ -22,7 +22,7 @@ st.markdown("Something Something")
 # hide_pages(["login"])
 #Adding a log out button
 if st.button("Log out"):
-    st.session_state["logged_in"] = False
+    st.session_state["authentication_status"] = False
     st.success("Logged out!")
     sleep(0.5)
     st.switch_page("app.py")
