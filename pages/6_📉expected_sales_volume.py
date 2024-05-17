@@ -5,7 +5,7 @@ import streamlit as st
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import os
-import tensorflow as tf
+import tensorflow
 from tensorflow import keras
 from tensorflow.keras.models import load_model
 from keras.models import Model
