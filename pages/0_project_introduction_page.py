@@ -22,7 +22,7 @@ st.image('m5.png', caption = 'An overview of how the M5 series are organized')
 
 # hide_pages(["login"])
 #Adding a log out button
-if st.button("Log out"):
+if st.button("Logout"):
     st.session_state["authentication_status"] = False
     st.success("Logged out!")
     sleep(0.5)
