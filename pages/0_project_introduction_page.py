@@ -21,10 +21,12 @@ st.image('m5.png', caption = 'An overview of how the M5 series are organized')
 
 
 # hide_pages(["login"])
+st.button("Next page")
 if st.button("Next page"):
     st.switch_page("pages/1_📈individual_price_analysis.py")
 
 #Adding a log out button
+st.button("Logout")
 if st.button("Logout"):
     st.session_state["authentication_status"] = False
     st.success("Logged out!")
