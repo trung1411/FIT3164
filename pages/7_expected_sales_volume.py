@@ -15,7 +15,7 @@ st.header("Expected sales volume")
 st.markdown("By implementing machine learning using the base RNN model, we are lookikng to predict the potential sales made when user get to choose their expected change in price (discount) and the model would product the expected sales")
 
 current_price = st.sidebar.number_input("Please enter the current price of your product that you want to apply to")
-discount = st.sidebar.number_input("Please enter the percent discount you want to apply to the product")
+discount = st.sidebar.number_input("Please enter the percent change of price you want to apply to the product (negative value means a discount)")
 
 # st.write("The current discount applied is {a}%".format(a = discount))
 
