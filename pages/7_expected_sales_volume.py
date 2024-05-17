@@ -65,3 +65,15 @@ new_df2 = new_df2.iloc[:,:1]
 
 
 st.write("The %change in sales volume will be 4.5%")
+
+
+
+# Adding a file uploader
+uploaded_files = st.file_uploader("Please choose a CSV file")
+
+for file in uploaded_files:
+
+    bytes_data = file.read()
+    st.write("File uploaded: ", file.name)
+    st.write(bytes_data)
+
