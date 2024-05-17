@@ -66,7 +66,7 @@ new_df2 = new_df.transpose().replace(np.nan,0)
 new_df2 = new_df2.iloc[:,:1]
 
 
-st.write("The %change in sales volume will be 4.5%")
+st.markdown("The %change in sales volume will be 4.5%")
 
 
 
