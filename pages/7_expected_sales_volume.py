@@ -112,7 +112,7 @@ if file is not None:
 
 #adding a file uploader to accept multiple CSV files
 
-uploaded_files = st.file_uploader("Please choose a CSV file", accept_multiple_files=True)
+uploaded_files = st.file_uploader("Please choose a CSV file you want us to analyse the price elasticity, filee format must be the same as the format shown above", accept_multiple_files=True)
 
 for file in uploaded_files:
 
