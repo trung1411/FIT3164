@@ -83,9 +83,9 @@ if file is not None:
     #To convert to a string based IO:
     stringio = StringIO(file.getvalue().decode("utf-8"))
     st.write(stringio)
-    #To read file as string:
-    string_data = stringio.read()
-    st.write(string_data)
+    # #To read file as string:
+    # string_data = stringio.read()
+    # st.write(string_data)
     #Can be used wherever a "file-like" object is accepted:
     df= pd.read_csv(file)
     st.write(df)
@@ -94,6 +94,6 @@ uploaded_files = st.file_uploader("Please choose a CSV file you want us to analy
 for file in uploaded_files:
     bytes_data = file.read()
     st.write("File uploaded:", file.name)
-    st.write(bytes_data)
+
 
 
