@@ -58,3 +58,10 @@ c1 = alt.Chart(new_df3).mark_line().encode( x= "Week", y = 'Sales'
 
 
 st.altair_chart(c1)
+
+# Next page button
+if st.button("Next page"):
+    st.switch_page("3_📈department_sales_analysis.py")
+
+if st.button("Go back"):
+    st.switch_page("1_📈individual_price_analysis.py")

@@ -16,6 +16,8 @@ def test_logout():
     at.button[0].click().run()
     assert at.switch_page
 
+    at.
+
 # def test_individual_price_analysis_page():
 #     "A user tries to select the item_id from the page"
 #     at = AppTest.from_file("../pages/1_individual_price_analysis")
