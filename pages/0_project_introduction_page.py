@@ -16,7 +16,7 @@ st.markdown("Working together as a group of four (Thanh Trung Tran, Zejinyi Liu,
 
 st.header("Dataset Introduction")
 st.markdown("Our project makes use of the M5 dataset provided by Walmart,  which constitutes a comprehensive collection of data related to the unit sales of various retail products of Walmart in the United States. It is organized into a grouped time series, encompasses a total of 3,049 unique products, further classified into three overarching product categories: Hobbies, Foods, and Household. Within these categories, there are seven product departments that provide a more granular breakdown. These products are sold across ten distinct stores situated in three different states: California (CA), Texas (TX), and Wisconsin (WI). The dataset's hierarchical structure allows for a flexible analysis, as unit sales can be aggregated at various levels, spanning from all products aggregated for all stores/states to individual product-level data. The historical data spans from January 29, 2011, to June 19, 2016, providing a maximum selling history of 1,941 days or approximately 5.4 years, with a 28-day test data period excluded.")
-
+st.image('m5.png', caption = 'An overview of how the M5 series are organized')
 
 
 
