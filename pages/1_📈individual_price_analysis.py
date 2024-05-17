@@ -47,7 +47,7 @@ st.line_chart(new_df)
 
 # Next page button
 if st.button("Next page"):
-    st.switch_page("2_📈individual_sales_analysis.py")
+    st.switch_page("pages/2_📈individual_sales_analysis.py")
 
 if st.button("Go back"):
-    st.switch_page("0_project_introduction_page.py")
+    st.switch_page("pages/0_project_introduction_page.py")

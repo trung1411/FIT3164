@@ -42,7 +42,7 @@ st.altair_chart(c2)
 
 #Next page
 if st.button("Next page"):
-    st.switch_page("4_💲price_elasticity_modelling.py")
+    st.switch_page("pages/4_💲price_elasticity_modelling.py")
 
 if st.button("Go back"):
-    st.switch_page("2_📈indidividual_sales_analysis.py")
+    st.switch_page("pages/2_📈indidividual_sales_analysis.py")

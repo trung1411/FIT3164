@@ -110,3 +110,10 @@ c3 = alt.Chart(price_elasticity_model).mark_line().encode( x= "Week", y = 'Elast
                                           ).properties(title = 'Change in elasticity  over time for items in department {dept_id}'.format(dept_id = department_choice))
 
 st.altair_chart(c3)
+
+#Next page
+if st.button("Next page"):
+    st.switch_page("pages/7_expected_sales_volume.py")
+
+if st.button("Go back"):
+    st.switch_page("pages/4_💲price_elasticity_modelling.py")

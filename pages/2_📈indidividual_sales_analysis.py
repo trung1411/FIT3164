@@ -61,7 +61,7 @@ st.altair_chart(c1)
 
 # Next page button
 if st.button("Next page"):
-    st.switch_page("3_📈department_sales_analysis.py")
+    st.switch_page("pages/3_📈department_sales_analysis.py")
 
 if st.button("Go back"):
-    st.switch_page("1_📈individual_price_analysis.py")
+    st.switch_page("pages/1_📈individual_price_analysis.py")
